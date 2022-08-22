@@ -7,7 +7,7 @@ from all_cats import *
 
 class GreenCatnip(CatnipBase):
     use_cats = [
-        swim_cat,
+        # swim_cat,
         octopus_cat,
         dance_cat,
         dragon_cat,

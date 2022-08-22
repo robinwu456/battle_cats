@@ -1,16 +1,27 @@
 # -*- coding:utf-8 -*-
 import argparse
+from datetime import datetime
 
 from purple_catnip import PurpleCatnip
 from red_catnip import RedCatnip
 from green_catnip import GreenCatnip
 from yellow_catnip import YellowCatnip
 
+# 腳本對應
 dict_catnip_func = {
     'purple': { 'name': '紫色', 'script_class': PurpleCatnip },
     'red'   : { 'name': '紅色', 'script_class': RedCatnip },
     'green' : { 'name': '綠色', 'script_class': GreenCatnip },
     'yellow' : { 'name': '黃色', 'script_class': YellowCatnip },
+}
+
+# 每天的貓薄荷關卡
+week_catnip = {
+    1: 'green',
+    2: 'purple',
+    3: 'red',
+    4: 'blue',
+    5: 'yellow'
 }
 
 if __name__ == '__main__':    
@@ -29,6 +40,9 @@ if __name__ == '__main__':
         exit()
 
     if args.catnip_color:
+        # 自動轉換顏色
+        if args.catnip_color == 'today':
+            args.catnip_color = week_catnip[datetime.today().isoweekday()]
         print (f"刷的貓薄荷顏色: {dict_catnip_func[args.catnip_color]['name']}")
     if args.use_flags:
         print (f"使用旗子數: {args.use_flags}")
@@ -46,5 +60,3 @@ if __name__ == '__main__':
     auto_catnip = dict_catnip_func[args.catnip_color]['script_class'](args)
     auto_catnip.start(auto_catnip.use_cats_method, auto_catnip.use_cats)
     # auto_catnip.use_cats_method()
-
-    print('finish')
