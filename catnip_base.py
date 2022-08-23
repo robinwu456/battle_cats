@@ -28,8 +28,9 @@ class CatnipBase():
         self.img_finish_comershow_ok = os.path.join(self.img_lib_path, 'finish_comershow_ok')             # 看廣告完畢
         self.img_rainbow_catnip_exists = os.path.join(self.img_lib_path, 'rainbow_catnip_exists')             # 看廣告完畢
         self.img_worker_cat = os.path.join(self.img_lib_path, 'worker_cat')             # 看廣告完畢
+        self.img_phone_back = os.path.join(self.img_lib_path, 'phone_back')             # 看廣告完畢
 
-        self.img_green_catnip_seed = os.path.join(self.img_lib_path, 'green_catnip_seed')             # 看廣告完畢
+        self.img_green_catnip_seed = os.path.join(self.img_lib_path, 'green_catnip_seed1')             # 看廣告完畢
         self.img_green_catnip = os.path.join(self.img_lib_path, 'green_catnip')             # 看廣告完畢
 
         # 遊戲畫面螢幕index
@@ -61,6 +62,7 @@ class CatnipBase():
     # 打關卡
     def battle(self, use_cats_method, use_cats, is_rainbow = False):
         sleep(5)
+        pyautogui.moveTo(2400, 500)
         pyautogui.drag(250, 0, 0.5)
 
         while True:
@@ -74,17 +76,18 @@ class CatnipBase():
                     self.check_catnip_kind(is_rainbow)    # 獎勵確認       
                     self.screen.click(self.img_bonus)
                     sleep(2)
-                    # 確認是否有發掘
-                    if self.screen.exists(self.img_find_dig_map):
-                        self.screen.click(self.img_find_dig_map)
-                    # 確認是否有彩虹貓薄荷
-                    if self.screen.exists(self.img_rainbow_catnip_exists):                        
-                        # print('出現彩虹貓薄荷，請自己打，程式結束。')
-                        # exit()
-                        self.debug_log('彩虹貓薄荷出現')
-                        screen.click(self.img_energy_reset_ok)
-                        self.battle(self.use_cats_method, { crazy_normal_cat, crazy_wall_cat, wall_cat, pole_cat, dance_cat }, is_rainbow=True)                        
-                        break
+                # 確認是否有發掘
+                if self.screen.exists(self.img_find_dig_map):
+                    self.debug_log('發現挖掘地圖！！！')
+                    self.screen.click(self.img_find_dig_map)
+                # 確認是否有彩虹貓薄荷
+                if self.screen.exists(self.img_rainbow_catnip_exists):                        
+                    # print('出現彩虹貓薄荷，請自己打，程式結束。')
+                    # exit()
+                    self.debug_log('彩虹貓薄荷出現！！！')
+                    screen.click(self.img_energy_reset_ok)
+                    self.battle(self.use_cats_method, { crazy_normal_cat, crazy_wall_cat, wall_cat, pole_cat, dance_cat }, is_rainbow=True)                        
+                    break
 
                 # 確定是否通關結束
                 if self.screen.exists(self.img_next_stage):
@@ -109,6 +112,8 @@ class CatnipBase():
 
         # 點一下螢幕2(cmd執行才能觸發)
         pyautogui.click(2400, 500)
+
+        self.debug_log('------start------')
         
         # 直接打關卡
         if self.args.stage_attack:
@@ -138,13 +143,16 @@ class CatnipBase():
             if screen.exists(self.img_look_comershow_btn):
                 screen.click(self.img_look_comershow_btn)
                 screen.click(self.img_energy_reset_ok)
+                self.debug_log('看廣告')
                 sleep(45)
+                screen.click(self.img_phone_back)
                 screen.click(self.img_finish_comershow_ok)
+                self.debug_log('廣告完畢')
 
             # 進關            
             self.wait_for_img_exists(screen, self.img_battle_start)
             self.screen.click(self.img_battle_start)
-            self.debug_log('進關')
+            self.debug_log('battle')
 
             # 統帥力是否不足
             if self.screen.exists(self.img_energy_reset_ok):
@@ -156,7 +164,7 @@ class CatnipBase():
                     # 進關                    
                     self.wait_for_img_exists(self.screen, self.img_battle_start)
                     self.screen.click(self.img_battle_start)
-                    self.debug_log('進關')
+                    self.debug_log('battle')
                     sleep(2)
                     # # 進關
                     # self.wait_for_img_exists(screen, self.img_battle_start)
@@ -172,4 +180,4 @@ class CatnipBase():
             if not self.args.run_out_energy:
                 break
         
-        self.debug_log('finish')
+        self.debug_log('------end------')
