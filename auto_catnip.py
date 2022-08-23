@@ -30,8 +30,8 @@ if __name__ == '__main__':
     parser.add_argument("-o", "--run-out-energy", help="重複直到體力用完", action="store_true")
     parser.add_argument("-f", "--use-flags", type=int, default=0, help="用旗子數量")
     parser.add_argument("-a", "--stage-attack", help="直接打關卡", action="store_true")
-    # parser.add_argument("-c", "--count-catnip", type=int, help="重複直到拿到貓薄荷數")
-    # parser.add_argument("-s", "--count-catnip-seeds", type=int, help="重複直到拿到貓薄荷種子數")
+    parser.add_argument("-n", "--count-catnip", type=int, default=0, help="重複直到拿到貓薄荷數")
+    parser.add_argument("-s", "--count-catnip-seeds", type=int, default=0, help="重複直到拿到貓薄荷種子數")
     args = parser.parse_args()
     
     # 必須輸入要刷的貓薄荷顏色
@@ -51,12 +51,15 @@ if __name__ == '__main__':
         print (f"體力使用完畢: {args.run_out_energy}")    
     if args.stage_attack:
         print (f"直接打關卡: {args.stage_attack}")    
-    # if args.count_catnip:
-    #     print (f"需取得貓薄荷數: {args.count_catnip}")
-    # if args.count_catnip_seeds:
-    #     print (f"需取得貓薄荷種子數: {args.count_catnip_seeds}")    
+    if args.count_catnip:
+        print (f"需取得貓薄荷數: {args.count_catnip}")
+        args.run_out_energy = True
+        args.use_flags = 999
+    if args.count_catnip_seeds:
+        print (f"需取得貓薄荷種子數: {args.count_catnip_seeds}") 
+        args.run_out_energy = True   
+        args.use_flags = 999
     
     # 開始刷貓薄荷
     auto_catnip = dict_catnip_func[args.catnip_color]['script_class'](args)
     auto_catnip.start(auto_catnip.use_cats_method, auto_catnip.use_cats)
-    # auto_catnip.use_cats_method()
