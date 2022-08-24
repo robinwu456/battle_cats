@@ -6,12 +6,13 @@ import pyautogui
 from all_cats import *
 import datetime
 
-screen = Screen(1)
+# screen = Screen(1)
 
 class CatnipBase():    
     def __init__(self, args):
         # 遊戲畫面螢幕index
         self.screen = Screen(1)
+
         self.args = args
 
         self.img_lib_path              = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__))), "img_lib")     # 圖庫
@@ -96,7 +97,7 @@ class CatnipBase():
                     # print('出現彩虹貓薄荷，請自己打，程式結束。')
                     # exit()
                     self.debug_log('彩虹貓薄荷出現！！！')
-                    screen.click(self.img_energy_reset_ok)
+                    self.screen.click(self.img_energy_reset_ok)
                     self.battle(self.use_cats_method, { crazy_normal_cat, crazy_wall_cat, wall_cat, pole_cat, dance_cat }, is_rainbow=True)                        
                     break
 
@@ -112,8 +113,8 @@ class CatnipBase():
     def use_cats_method(self, use_cats):
         for cat in use_cats:
             try:
-                if screen.exists(cat):
-                    screen.click(cat)
+                if self.screen.exists(cat):
+                    self.screen.click(cat)
             except Exception as ex:
                 if ex is KeyboardInterrupt:
                     return
@@ -133,7 +134,7 @@ class CatnipBase():
             return
 
         # 確認是否進入關卡
-        if self.args.catnip_color != 'green':
+        if self.args.catnip_color != 'other' and self.args.catnip_color != 'green':
             if not self.screen.exists(self.img_stage_title):
                 self.debug_log (f'請進入 "進化的{self.args.catnip_color}貓薄荷" 關卡。')
                 exit()
@@ -162,7 +163,7 @@ class CatnipBase():
             #     self.debug_log('廣告完畢')
 
             # 進關            
-            self.wait_for_img_exists(screen, self.img_battle_start)
+            self.wait_for_img_exists(self.screen, self.img_battle_start)
             self.screen.click(self.img_battle_start)            
 
             # 統帥力是否不足
