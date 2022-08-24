@@ -125,6 +125,7 @@ class CatnipBase():
         pyautogui.click(2400, 500)
 
         self.debug_log('------start------')
+        self.debug_log(self.args)
         
         # 直接打關卡
         if self.args.stage_attack:
@@ -150,15 +151,15 @@ class CatnipBase():
 
         # 持續通關
         while True:
-            # 看廣告回體力
-            if screen.exists(self.img_look_comershow_btn):
-                screen.click(self.img_look_comershow_btn)
-                screen.click(self.img_energy_reset_ok)
-                self.debug_log('看廣告')
-                sleep(45)
-                screen.click(self.img_phone_back)
-                screen.click(self.img_finish_comershow_ok)
-                self.debug_log('廣告完畢')
+            # # 看廣告回體力
+            # if screen.exists(self.img_look_comershow_btn):
+            #     screen.click(self.img_look_comershow_btn)
+            #     screen.click(self.img_energy_reset_ok)
+            #     self.debug_log('看廣告')
+            #     sleep(45)
+            #     screen.click(self.img_phone_back)
+            #     screen.click(self.img_finish_comershow_ok)
+            #     self.debug_log('廣告完畢')
 
             # 進關            
             self.wait_for_img_exists(screen, self.img_battle_start)

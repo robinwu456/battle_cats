@@ -62,4 +62,7 @@ if __name__ == '__main__':
     
     # 開始刷貓薄荷
     auto_catnip = dict_catnip_func[args.catnip_color]['script_class'](args)
-    auto_catnip.start(auto_catnip.use_cats_method, auto_catnip.use_cats)
+    try:
+        auto_catnip.start(auto_catnip.use_cats_method, auto_catnip.use_cats)
+    except Exception as ex:
+        auto_catnip.debug_log(ex)
