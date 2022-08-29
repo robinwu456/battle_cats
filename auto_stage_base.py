@@ -6,15 +6,12 @@ import pyautogui
 from all_cats import *
 import datetime
 
-# screen = Screen(1)
-
-class CatnipBase():    
+class AutoStageBase():    
     def __init__(self, args):
         # 遊戲畫面螢幕index
         self.screen = Screen(1)
 
         self.args = args
-
         self.img_lib_path              = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__))), "img_lib")     # 圖庫
         
         self.img_stage_title           = os.path.join(self.img_lib_path, f'stage_title_{self.args.catnip_color}.PNG')        
@@ -94,8 +91,6 @@ class CatnipBase():
                     self.screen.click(self.img_find_dig_map)
                 # 確認是否有彩虹貓薄荷
                 if self.screen.exists(self.img_rainbow_catnip_exists):                        
-                    # print('出現彩虹貓薄荷，請自己打，程式結束。')
-                    # exit()
                     self.debug_log('彩虹貓薄荷出現！！！')
                     self.screen.click(self.img_energy_reset_ok)
                     self.battle(self.use_cats_method, { crazy_normal_cat, crazy_wall_cat, wall_cat, pole_cat, dance_cat }, is_rainbow=True)                        

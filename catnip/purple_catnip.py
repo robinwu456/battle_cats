@@ -1,10 +1,10 @@
 # -*- coding:utf-8 -*-
 import os
-from catnip_base import CatnipBase
+from auto_stage_base import AutoStageBase
 from sikulix4python import *
 from all_cats import *
 
-class PurpleCatnip(CatnipBase):
+class PurpleCatnip(AutoStageBase):
     use_cats = [
         nuonuo_cat,
         dance_cat,

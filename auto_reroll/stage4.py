@@ -3,7 +3,7 @@ from time import sleep
 from sikulix4python import *
 
 import pyautogui
-from auto_reroll_image_init import *
+from auto_reroll.auto_reroll_image_init import *
 
 stage_index = 4
 stage_name = '中國'

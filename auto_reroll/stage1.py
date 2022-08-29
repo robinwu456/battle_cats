@@ -3,7 +3,7 @@ from time import sleep
 from sikulix4python import *
 
 import pyautogui
-from auto_reroll_image_init import *
+from auto_reroll.auto_reroll_image_init import *
 
 def stage1(screen):
     print('1/7')

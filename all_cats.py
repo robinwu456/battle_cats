@@ -24,3 +24,4 @@ rockband_cat     = os.path.join(img_lib_path, 'rockband_cat')   # 搖滾樂團
 crazy_normal_cat     = os.path.join(img_lib_path, 'crazy_normal_cat')   # 狂暴小貓
 crazy_wall_cat     = os.path.join(img_lib_path, 'crazy_wall_cat')   # 狂暴牆貓
 wall_cat     = os.path.join(img_lib_path, 'wall_cat')   # 牆貓
+leg_cat     = os.path.join(img_lib_path, 'leg_cat')   # 牆貓

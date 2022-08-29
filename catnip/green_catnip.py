@@ -2,10 +2,10 @@
 import argparse
 from time import sleep
 from sikulix4python import *
-from catnip_base import *
+from auto_stage_base import *
 from all_cats import *
 
-class GreenCatnip(CatnipBase):
+class GreenCatnip(AutoStageBase):
     use_cats = [
         # swim_cat,
         octopus_cat,

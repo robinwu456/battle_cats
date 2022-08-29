@@ -1,15 +1,15 @@
 # -*- coding:utf-8 -*-
 from time import sleep
 from sikulix4python import *
-from auto_reroll_image_init import *
+from auto_reroll.auto_reroll_image_init import *
 
-from stage1 import *
-from stage2 import *
-from stage3 import *
-from stage4 import *
-from stage5 import *
-from stage6 import *
-from stage7 import *
+from auto_reroll.stage1 import *
+from auto_reroll.stage2 import *
+from auto_reroll.stage3 import *
+from auto_reroll.stage4 import *
+from auto_reroll.stage5 import *
+from auto_reroll.stage6 import *
+from auto_reroll.stage7 import *
 
 import pyautogui
 import os
