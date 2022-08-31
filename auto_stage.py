@@ -36,18 +36,12 @@ if __name__ == '__main__':
     parser.add_argument("-a", "--stage-attack"      , help="直接打關卡", action="store_true")
     parser.add_argument("-n", "--count-catnip"      , type=int, default=0, help="重複直到拿到貓薄荷數")
     parser.add_argument("-s", "--count-catnip-seeds", type=int, default=0, help="重複直到拿到貓薄荷種子數")
-    parser.add_argument("-b", "--start-with-begin"  , help="從menu選單開始執行", action="store_true")
     args = parser.parse_args()
     
     # 必須輸入要刷的貓薄荷顏色
     if not args.catnip_color:
         print('請輸入要刷的貓薄荷顏色')
         exit()
-    
-    # # 必須輸入進入點
-    # if not args.start_with_begin:
-    #     print('請輸入是否從主頁面開始')
-    #     exit()
 
     if args.catnip_color:
         # 自動轉換顏色
@@ -69,8 +63,6 @@ if __name__ == '__main__':
         print (f"需取得貓薄荷種子數: {args.count_catnip_seeds}") 
         args.run_out_energy = True   
         args.use_flags = 999
-    if args.start_with_begin:
-        print (f"進入點: {'主頁面' if args.start_with_begin else '關卡頁面'}")
     
     # 開始刷貓薄荷
     auto_stage = dict_catnip_func[args.catnip_color]['script_class'](args)

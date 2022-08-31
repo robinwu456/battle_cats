@@ -12,8 +12,9 @@ class AutoStageBase():
         self.screen = Screen(1)
 
         self.args = args
-        self.img_lib_path              = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__))), "img_lib")     # 圖庫        
-        self.stage_title           = os.path.join(self.img_lib_path, f'stage_title_{self.args.catnip_color}')        
+        self.img_lib_path          = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__))), "img_lib")         # 圖庫        
+        self.stage_title           = os.path.join(self.img_lib_path, f'stage_title_{self.args.catnip_color}')                  # 貓薄荷關卡頁面-內部    
+        self.outer_stage_title     = os.path.join(self.img_lib_path, f'outer_stage_title_{self.args.catnip_color}')            # 貓薄荷關卡頁面-外部
 
         self.battle_start          = os.path.join(self.img_lib_path, 'battle_start')                    # 戰鬥開始
         self.edit_team             = os.path.join(self.img_lib_path, 'edit_team')                       # 編輯隊伍
@@ -31,8 +32,7 @@ class AutoStageBase():
         self.phone_back            = os.path.join(self.img_lib_path, 'phone_back')                      # 上一頁
         self.catnip_seed           = os.path.join(self.img_lib_path, 'green_catnip_seed1')              # 獎勵-貓薄荷種子
         self.catnip                = os.path.join(self.img_lib_path, 'green_catnip')                    # 獎勵-貓薄荷
-        self.activity_stage        = os.path.join(self.img_lib_path, 'activity_stage')                  # 活動關卡頁面
-        self.outer_stage_title_red = os.path.join(self.img_lib_path, 'outer_stage_title_red')           # 活動關卡頁面
+        self.activity_stage        = os.path.join(self.img_lib_path, 'activity_stage')                  # 活動關卡頁面        
         self.dead                  = os.path.join(self.img_lib_path, 'dead')                            # 死亡畫面
 
         # 當前已刷場數
@@ -143,11 +143,9 @@ class AutoStageBase():
             self.battle(use_cats_method, use_cats)
             return        
 
-        # 從menu進入
-        if self.args.start_with_begin:
-            if not self.screen.exists(self.activity_stage):
-                self.debug_log (f'請進入menu選單，並停在傳奇故事頁面。')
-                exit()
+        # 判斷從menu進入
+        if self.screen.exists(self.activity_stage):
+            self.debug_log('從主頁面進')
             self.screen.click(self.activity_stage)
             self.wait_for_img_exists(self.screen, self.use_last_team_ok)
             self.screen.click(self.use_last_team_ok)
@@ -155,12 +153,12 @@ class AutoStageBase():
             self.screen.click(self.battle_start)
             sleep(2)
             while True:            
-                if self.screen.exists(self.outer_stage_title_red):                
+                if self.screen.exists(self.outer_stage_title):                
                     for i in range(1):
                         pyautogui.moveTo(2600, 500)
                         pyautogui.drag(0, -100, 0.5)
                     sleep(1)
-                    outer_stage_title_red = self.screen.find(self.outer_stage_title_red)
+                    outer_stage_title_red = self.screen.find(self.outer_stage_title)
                     hover(outer_stage_title_red.getCenter())
                     pyautogui.mouseDown()
                     sleep(2)
